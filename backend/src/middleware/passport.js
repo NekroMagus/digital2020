@@ -27,7 +27,7 @@ const passportOptions = (passport) => {
   passport.use(new VKontakteStrategy({
         clientID:     process.env.CLIENT_ID || 0, // VK.com docs call it 'API ID', 'app_id', 'api_id', 'client_id' or 'apiId'
         clientSecret: process.env.CLIENT_SECRET || 'asdf',
-        callbackURL:  process.env.CLIENT_CALLBACK || 'https://localhost:5555/',
+        callbackURL:  process.env.CLIENT_CALLBACK || 'http://localhost:5555/',
         apiVersion: '5.22'
       },
       function(accessToken, refreshToken, params, profile, done) {
