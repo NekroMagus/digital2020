@@ -131,7 +131,12 @@ User.init({
   },
   vkId: {
     type: DataTypes.BIGINT,
-    defaultValue:null
+    defaultValue: null
+  },
+  telegramId: {
+    type: DataTypes.BIGINT,
+    unique: true,
+    defaultValue: null
   }
 
 }, {

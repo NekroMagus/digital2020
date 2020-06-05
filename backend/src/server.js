@@ -7,6 +7,7 @@ import passport from 'passport';
 
 import auth from './routes/auth';
 import profile from './routes/profile';
+import leaders from './routes/leaders';
 import ErrorController from "./controllers/ErrorController";
 
 const app = express();
@@ -53,8 +54,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', auth);
+app.use('/api/leaders',leaders);
 app.use('/api/profile', passport.authenticate('jwt', {session: false}), profile);
-
 
 app.use(ErrorController.handleError);
 

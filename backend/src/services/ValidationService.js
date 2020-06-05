@@ -1,3 +1,5 @@
+import ErrorHandler from "../helper/ErrorHandler";
+
 class ValidationService {
 
   static isAllUserProfileCompleted(profile) {
@@ -14,6 +16,24 @@ class ValidationService {
         && profile.street !== null
         && profile.socialPosition !== null
         && profile.phone !== null;
+  }
+
+  static isBodyFieldEmpty(data, name = null) {
+    if (!data) {
+      throw new ErrorHandler(500, `${name} in body is required`);
+    }
+  }
+
+  static isQueryFieldEmpty(data, name = null) {
+    if (!data) {
+      throw new ErrorHandler(500, `${name} in query is required`);
+    }
+  }
+
+  static isNotExists(data, name = null) {
+    if (!data) {
+      throw new ErrorHandler(500, `${name} is not exists`);
+    }
   }
 
 }

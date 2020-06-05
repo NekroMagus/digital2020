@@ -1,5 +1,5 @@
 import {Referral, User} from '../models/user';
-import {Op} from "sequelize";
+import sequelize, {Op} from "sequelize";
 
 class UserService {
 
@@ -11,6 +11,10 @@ class UserService {
     });
   }
 
+  static findByTelegramId(telegramId) {
+    return User.findOne({where: {telegramId}});
+  }
+
   static getReferralByUserId(id) {
     return User.findByPk(id, {
       attributes: {
@@ -19,6 +23,16 @@ class UserService {
       include: [{
         model: Referral
       }]
+    })
+  }
+
+  static findLeaders() {
+    return User.findAll({
+      limit: 5,
+      order: [
+          ['points','DESC']
+      ],
+      attributes: ['id', 'firstName', 'lastName','rating','points']
     })
   }
 

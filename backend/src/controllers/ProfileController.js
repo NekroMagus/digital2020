@@ -67,6 +67,39 @@ class ProfileController {
     }
   }
 
+  static async getUserByTelegramId(req, res, next) {
+    try {
+      const {telegramId} = req.query;
+      await ValidationService.isQueryFieldEmpty(telegramId, 'telegramId');
+      const user = await UserService.findByTelegramId(telegramId);
+      await ValidationService.isNotExists(user, 'User');
+      if (user.id !== req.user.id) {
+        return res.status(403).json({
+          success: false,
+          message: "It's not you profile"
+        });
+      }
+      res.status(200).json(user);
+    } catch (e) {
+      next(e);
+    }
+
+  }
+
+  static async updateTelegramId(req, res, next) {
+    try {
+      const {telegramId} = req.body;
+      await ValidationService.isBodyFieldEmpty(telegramId, 'telegramId');
+      await UserService.update(req.user.id, {telegramId, points: req.user.points + 50});
+      res.status(200).json({
+        success: true,
+        message: "telegramId added"
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
 }
 
 export default ProfileController;
