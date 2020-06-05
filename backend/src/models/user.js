@@ -15,7 +15,6 @@ User.init({
   email: {
     type: DataTypes.STRING,
     unique: true,
-    allowNull: false,
     validate: {
       isEmail: true
     }
@@ -129,6 +128,10 @@ User.init({
   rating: {
     type: DataTypes.ENUM(['Активист', 'Лидер мнений', 'Амбассадор']),
     defaultValue: 'Активист'
+  },
+  vkId: {
+    type: DataTypes.BIGINT,
+    defaultValue:null
   }
 
 }, {
