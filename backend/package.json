@@ -1,0 +1,14 @@
+{
+  "name": "digital2020",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "license": "MIT",
+  "repository": "",
+  "scripts": {
+    "start": "node bin/www"
+  },
+  "dependencies": {
+    "morgan": "~1.9.1"
+  }
+}
