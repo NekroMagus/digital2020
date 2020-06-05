@@ -67,7 +67,7 @@ typings/
 # dotenv environment variables file
 .env
 .env.test
-config/secret.js
+backend/src/config/secret.js
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
