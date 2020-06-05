@@ -7,8 +7,6 @@ import dotenv from 'dotenv';
 import auth from './routes/auth';
 import ErrorController from "./controllers/ErrorController";
 
-dotenv.config();
-
 const app = express();
 
 import sequelize from "./config/database";
@@ -30,6 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/auth', auth);
+
 
 app.use(ErrorController.handleError);
 

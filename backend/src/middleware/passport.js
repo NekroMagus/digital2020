@@ -1,4 +1,5 @@
 import {ExtractJwt, Strategy} from 'passport-jwt';
+import UserService from "../services/UserService";
 
 
 const options = {
@@ -10,7 +11,7 @@ const passportOptions = (passport) => {
   passport.use(
       new Strategy(options, async (payload, done) => {
         try {
-          let user;
+          const user = await UserService.findById(payload.id);
           if (user) {
             done(null, user);
           } else {
