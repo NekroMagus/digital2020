@@ -5,6 +5,7 @@ import UserService from "../services/UserService";
 import ReferralService from "../services/ReferralService";
 
 const SECRET_KEY = process.env.SECRET_KEY || 'secret';
+const EXPIRED_TIME = 48 * 60 * 60;
 
 class AuthController {
 
@@ -23,7 +24,7 @@ class AuthController {
         if (passwordResult) {
           const token = jwt.sign({
             id: candidate.id
-          }, SECRET_KEY, {expiresIn: 48 * 60 * 60});
+          }, SECRET_KEY, {expiresIn: EXPIRED_TIME});
           res.status(200).json({
             token
           });
@@ -64,7 +65,7 @@ class AuthController {
       const userDb = await UserService.create({email, password: passwordDb, firstName, lastName});
       const token = await jwt.sign({
         id: userDb.id
-      }, SECRET_KEY, {expiresIn: 48 * 60 * 60});
+      }, SECRET_KEY, {expiresIn: EXPIRED_TIME});
       if (refId && (Number.isInteger(refId) && refId !== +userDb.id)) {
         const reference = await UserService.findById(refId);
         if (reference) {
@@ -92,12 +93,12 @@ class AuthController {
         const newUser = await UserService.create({firstName: user.first_name, lastName: user.last_name, vkId: user.id});
         const token = await jwt.sign({
           id: newUser.id
-        }, SECRET_KEY, {expiresIn: 48 * 60 * 60});
+        }, SECRET_KEY, {expiresIn: EXPIRED_TIME});
         res.status(200).json(token);
       } else {
         const token = await jwt.sign({
           id: userDb.id
-        }, SECRET_KEY, {expiresIn: 48 * 60 * 60});
+        }, SECRET_KEY, {expiresIn: EXPIRED_TIME});
         res.status(200).json(token);
       }
     } catch (e) {

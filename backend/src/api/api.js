@@ -1,0 +1,1 @@
+const API_LINK = "https://documenter.getpostman.com/view/11168076/SztK1Ps8?version=latest#intro";
