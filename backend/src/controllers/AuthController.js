@@ -68,7 +68,8 @@ class AuthController {
       if (refId && (Number.isInteger(refId) && refId !== +userDb.id)) {
         const reference = await UserService.findById(refId);
         if (reference) {
-          await ReferralService.create({userId: refId});
+          await reference.increment(['points'], {by: 20});
+          await ReferralService.create({ref: userDb.id, userId: refId});
         }
       }
       return res.status(201).json({

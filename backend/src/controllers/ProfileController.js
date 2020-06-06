@@ -18,7 +18,12 @@ class ProfileController {
     try {
       const me = await UserService.getReferralByUserId(req.user.id);
       const ref = await me.getReferrals();
-      const ids = ref.map(el => el.userId);
+      if (ref.length === 0 ) {
+        return res.status(200).json(ref);
+      }
+      console.log(ref);
+      const ids = ref.map(el => el.ref);
+      console.log(ids);
       const users = await UserService.findAllByIds(ids);
       res.status(200).json(users);
     } catch (e) {

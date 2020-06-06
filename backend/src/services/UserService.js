@@ -22,14 +22,15 @@ class UserService {
   }
 
   static getReferralByUserId(id) {
-    return User.findByPk(id, {
+    return User.findOne({
+      where: {id},
       attributes: {
         exclude: ['updatedAt', 'createdAt', 'password']
       },
       include: [{
         model: Referral
       }]
-    })
+    });
   }
 
   static findLeaders() {

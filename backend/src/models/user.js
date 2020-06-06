@@ -214,6 +214,10 @@ Referral.init({
     autoIncrement: true,
     primaryKey: true,
     allowNull: false
+  },
+  ref: {
+    type: DataTypes.BIGINT,
+    allowNull: false
   }
 }, {
   underscored: true,
@@ -245,6 +249,30 @@ Like.init({
   modelName: 'likes',
 });
 
+export class Comment extends Model {
+}
+
+Comment.init({
+  id: {
+    type: DataTypes.BIGINT,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false
+  },
+  text: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  userId: {
+    type: DataTypes.BIGINT,
+    allowNull: false
+  }
+}, {
+  underscored: true,
+  sequelize,
+  modelName: 'comments',
+});
+
 
 User.hasMany(Referral);
 Referral.belongsTo(User);
@@ -254,3 +282,6 @@ Project.belongsTo(User);
 
 Project.hasMany(Like, {onDelete: 'CASCADE'});
 Like.belongsTo(Project);
+
+Project.hasMany(Comment, {onDelete: 'CASCADE'});
+Comment.belongsTo(Project);
