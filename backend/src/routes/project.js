@@ -17,6 +17,7 @@ router
     .delete('/like/:projectId', passport.authenticate('jwt', {session: false}), LikeController.deleteLike);
 
 router
+    .get('/comment/:projectId',CommentController.findAllByProjectId)
     .post('/comment', passport.authenticate('jwt', {session: false}), CommentController.create);
 
 export default router;

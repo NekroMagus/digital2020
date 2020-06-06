@@ -21,9 +21,7 @@ class ProfileController {
       if (ref.length === 0 ) {
         return res.status(200).json(ref);
       }
-      console.log(ref);
       const ids = ref.map(el => el.ref);
-      console.log(ids);
       const users = await UserService.findAllByIds(ids);
       res.status(200).json(users);
     } catch (e) {
