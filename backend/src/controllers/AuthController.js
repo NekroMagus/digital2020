@@ -83,6 +83,28 @@ class AuthController {
       next(e);
     }
   }
+
+  static async authVk(req, res, next) {
+    try {
+      const {user} = req.body.session;
+      const userDb = await UserService.findByVkId(user.id);
+      if (!userDb) {
+        const newUser = await UserService.create({firstName: user.first_name, lastName: user.last_name, vkId: user.id});
+        const token = await jwt.sign({
+          id: newUser.id
+        }, SECRET_KEY, {expiresIn: 48 * 60 * 60});
+        res.status(200).json(token);
+      } else {
+        const token = await jwt.sign({
+          id: userDb.id
+        }, SECRET_KEY, {expiresIn: 48 * 60 * 60});
+        res.status(200).json(token);
+      }
+    } catch (e) {
+      next(e);
+    }
+  }
+
 }
 
 export default AuthController;

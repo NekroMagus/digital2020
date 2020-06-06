@@ -21,7 +21,6 @@ User.init({
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
   },
   firstName: {
     type: DataTypes.STRING,
@@ -139,6 +138,7 @@ User.init({
   },
   vkId: {
     type: DataTypes.BIGINT,
+    unique: true,
     defaultValue: null
   },
   telegramId: {

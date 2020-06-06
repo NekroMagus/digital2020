@@ -25,7 +25,7 @@ class LeaderController {
 
   static async getLeaderFromVK(req, res, next) {
     try {
-      const url = `https://api.vk.com/method/users.search?sort=0&count=20&fields=followers_count,photo_max_orig&city=46&access_token=${process.env.ACCESS_TOKEN}&v=5.107`;
+      const url = `https://api.vk.com/method/users.search?sort=0&count=23&fields=followers_count,photo_max_orig&city=46&is_closed=false&access_token=${process.env.ACCESS_TOKEN}&v=5.107`;
       // await request(url, (error, response, body) => {
       //   let result = JSON.parse(body);
       //   return res.status(200).json(result);
@@ -33,7 +33,6 @@ class LeaderController {
       fs.readFile('src/helper/users.json', (err, file) => {
         return res.status(200).json(JSON.parse(file));
       })
-
     } catch (e) {
       next(e);
     }

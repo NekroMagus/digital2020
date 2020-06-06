@@ -14,7 +14,7 @@ const sequelize = new Sequelize(DATABASE, LOGIN, PASSWORD, {
   underscored: true
 });
 
-sequelize.sync({force: false})
+sequelize.sync({force: true})
     .then(result => {
       // console.log(result);
     })

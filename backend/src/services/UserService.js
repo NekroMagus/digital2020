@@ -12,6 +12,17 @@ class UserService {
     });
   }
 
+  static findByVkId(vkId) {
+    return User.findOne({
+      where: {vkId},
+      attributes: {
+        exclude: ['updatedAt', 'createdAt', 'password']
+      },
+      include: [{model: Project}]
+    });
+  }
+
+
   static findByTelegramId(telegramId) {
     return User.findOne({
       where: {telegramId},
