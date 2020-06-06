@@ -129,6 +129,10 @@ User.init({
     type: DataTypes.ENUM(['Активист', 'Лидер мнений', 'Амбассадор']),
     defaultValue: 'Активист'
   },
+  birthday: {
+    type: DataTypes.DATE,
+    defaultValue: null
+  },
   vkId: {
     type: DataTypes.BIGINT,
     defaultValue: null
@@ -161,5 +165,60 @@ Referral.init({
   modelName: 'referrals',
 });
 
+export class Project extends Model {
+}
+
+Project.init({
+  id: {
+    type: DataTypes.BIGINT,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false
+  },
+  title: {
+    type: DataTypes.STRING,
+    allowNull:false
+  },
+  projectType: {
+    type: DataTypes.ENUM(['Социальный проект','Общественная инициатива','Инициатива органов власти','Жалоба','Петиция']),
+    allowNull: false
+  },
+  shortDescription: {
+    type: DataTypes.STRING(300),
+    allowNull: false
+  },
+  description: {
+    type: DataTypes.STRING(1500),
+  },
+  category: {
+    type: DataTypes.ARRAY(DataTypes.ENUM(['Технологии', 'Культурное наследие', 'Строительство', 'Наука и инновации', 'Медицина'
+      , 'Гос. услуги', 'Мой район', 'Туризм', 'ЖКХ', 'Экономика и бизнес', 'Транспорт', 'Ветеринария', 'Образование'
+      , 'Электронный дом', 'Благоустройство', 'Торговля и услуги', 'Социальная сфера', 'IT-технологии', 'Экология'
+      , 'Культура', 'Парки, зеленые зоны', 'Спорт', 'Город', 'Городские мероприятия'])),
+    allowNull: false
+  },
+  resources: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  thanks: {
+    type: DataTypes.STRING
+  },
+  deadline: {
+    type: DataTypes.DATE,
+  },
+  files: {
+    type: DataTypes.STRING,
+    defaultValue: null
+  }
+}, {
+  underscored: true,
+  sequelize,
+  modelName: 'projects',
+});
+
 User.hasMany(Referral);
 Referral.belongsTo(User);
+
+User.hasMany(Project, {onDelete: 'CASCADE'});
+Project.belongsTo(User);

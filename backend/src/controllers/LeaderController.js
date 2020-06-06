@@ -1,6 +1,7 @@
 import UserService from "../services/UserService";
 
 class LeaderController {
+
   static async getLeaderUsers(req, res, next) {
     try {
       const users = await UserService.findLeaders();

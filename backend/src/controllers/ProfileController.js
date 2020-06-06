@@ -30,7 +30,7 @@ class ProfileController {
     try {
       const {
         password, firstName, lastName, patronymic, gender, information, description, projectDescription,
-        interests, zipCode, city, areaCity, areaRegion, street, socialPosition, phone, vkLink,
+        interests, zipCode, city, areaCity, areaRegion, street, socialPosition, phone,birthday, vkLink,
         youtubeLink, instagramLink, twitterLink, facebookLink
       } = req.body;
       const body = {};
@@ -50,6 +50,7 @@ class ProfileController {
       body.street = street || req.user.street;
       body.socialPosition = socialPosition || req.user.socialPosition;
       body.phone = phone || req.user.phone;
+      body.birthday = birthday ? new Date(birthday) : req.user.birthday;
       body.vkLink = vkLink || req.user.vkLink;
       body.youtubeLink = youtubeLink || req.user.youtubeLink;
       body.instagramLink = instagramLink || req.user.instagramLink;
@@ -59,7 +60,7 @@ class ProfileController {
       const userDb = await User.findByPk(req.user.id);
       const valid = await ValidationService.isAllUserProfileCompleted(userDb);
       if (valid) {
-        await UserService.update(req.user.id, {points: req.user.points + 50});
+        await req.user.increment('points', {by: 50});
       }
       res.status(200).json(body);
     } catch (e) {

@@ -15,24 +15,25 @@ class ValidationService {
         && profile.areaRegion !== null
         && profile.street !== null
         && profile.socialPosition !== null
-        && profile.phone !== null;
+        && profile.phone !== null
+        && profile.birthday !== null;
   }
 
   static isBodyFieldEmpty(data, name = null) {
     if (!data) {
-      throw new ErrorHandler(500, `${name} in body is required`);
+      throw new ErrorHandler(400, `${name} in body is required`);
     }
   }
 
   static isQueryFieldEmpty(data, name = null) {
     if (!data) {
-      throw new ErrorHandler(500, `${name} in query is required`);
+      throw new ErrorHandler(400, `${name} in query is required`);
     }
   }
 
   static isNotExists(data, name = null) {
     if (!data) {
-      throw new ErrorHandler(500, `${name} is not exists`);
+      throw new ErrorHandler(404, `${name} is not exists`);
     }
   }
 

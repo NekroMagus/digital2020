@@ -8,12 +8,15 @@ import passport from 'passport';
 import auth from './routes/auth';
 import profile from './routes/profile';
 import leaders from './routes/leaders';
+import projects from './routes/project';
+import users from './routes/users';
 import ErrorController from "./controllers/ErrorController";
 
 const app = express();
 
 import sequelize from "./config/database";
 import passportOptions from "./middleware/passport";
+import updateUserRating from "./middleware/updateUserRating";
 
 if (process.env.NODE_ENV === 'production') {
 
@@ -54,7 +57,11 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', auth);
-app.use('/api/leaders',leaders);
+app.use('/api/leaders', leaders);
+app.use('/api/projects', projects);
+app.use('/api/user', users);
+
+app.use('/api/profile', passport.authenticate('jwt', {session: false}), updateUserRating);
 app.use('/api/profile', passport.authenticate('jwt', {session: false}), profile);
 
 app.use(ErrorController.handleError);

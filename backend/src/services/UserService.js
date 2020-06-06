@@ -1,5 +1,5 @@
-import {Referral, User} from '../models/user';
-import sequelize, {Op} from "sequelize";
+import {Project, Referral, User} from '../models/user';
+import {Op} from "sequelize";
 
 class UserService {
 
@@ -7,7 +7,8 @@ class UserService {
     return User.findByPk(id, {
       attributes: {
         exclude: ['updatedAt', 'createdAt', 'password']
-      }
+      },
+      include: [{model: Project}]
     });
   }
 
@@ -30,9 +31,9 @@ class UserService {
     return User.findAll({
       limit: 5,
       order: [
-          ['points','DESC']
+        ['points', 'DESC']
       ],
-      attributes: ['id', 'firstName', 'lastName','rating','points']
+      attributes: ['id', 'firstName', 'lastName', 'rating', 'points']
     })
   }
 
