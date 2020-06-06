@@ -1,5 +1,6 @@
 import ProjectService from "../services/ProjectService";
 import ValidationService from "../services/ValidationService";
+import LikeService from "../services/LikeService";
 
 class ProjectController {
 
@@ -36,6 +37,7 @@ class ProjectController {
         body.projectType = projectType;
         body.userId = req.user.id;
         const projectDb = await ProjectService.create(body);
+        await LikeService.upsertLike({userId: req.user.id, projectId: projectDb.id, reputation: 1});
         return res.status(201).json(projectDb);
       } else {
         const project = await ProjectService.findById(id);

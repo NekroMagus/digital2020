@@ -39,6 +39,10 @@ User.init({
     type: DataTypes.ENUM(['Мужской', 'Женский']),
     defaultValue: null
   },
+  avatar: {
+    type: DataTypes.STRING,
+    defaultValue: null
+  },
   information: {
     type: DataTypes.STRING,
     defaultValue: null
@@ -149,22 +153,6 @@ User.init({
   modelName: 'users',
 });
 
-export class Referral extends Model {
-}
-
-Referral.init({
-  id: {
-    type: DataTypes.BIGINT,
-    autoIncrement: true,
-    primaryKey: true,
-    allowNull: false
-  }
-}, {
-  underscored: true,
-  sequelize,
-  modelName: 'referrals',
-});
-
 export class Project extends Model {
 }
 
@@ -177,10 +165,10 @@ Project.init({
   },
   title: {
     type: DataTypes.STRING,
-    allowNull:false
+    allowNull: false
   },
   projectType: {
-    type: DataTypes.ENUM(['Социальный проект','Общественная инициатива','Инициатива органов власти','Жалоба','Петиция']),
+    type: DataTypes.ENUM(['Социальный проект', 'Общественная инициатива', 'Инициатива органов власти', 'Жалоба', 'Петиция']),
     allowNull: false
   },
   shortDescription: {
@@ -217,8 +205,52 @@ Project.init({
   modelName: 'projects',
 });
 
+export class Referral extends Model {
+}
+
+Referral.init({
+  id: {
+    type: DataTypes.BIGINT,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false
+  }
+}, {
+  underscored: true,
+  sequelize,
+  modelName: 'referrals',
+});
+
+export class Like extends Model {
+}
+
+Like.init({
+  id: {
+    type: DataTypes.BIGINT,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false
+  },
+  reputation: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  userId: {
+    type: DataTypes.BIGINT,
+    allowNull: false
+  }
+}, {
+  underscored: true,
+  sequelize,
+  modelName: 'likes',
+});
+
+
 User.hasMany(Referral);
 Referral.belongsTo(User);
 
 User.hasMany(Project, {onDelete: 'CASCADE'});
 Project.belongsTo(User);
+
+Project.hasMany(Like, {onDelete: 'CASCADE'});
+Like.belongsTo(Project);

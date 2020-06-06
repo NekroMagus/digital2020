@@ -13,7 +13,12 @@ class UserService {
   }
 
   static findByTelegramId(telegramId) {
-    return User.findOne({where: {telegramId}});
+    return User.findOne({
+      where: {telegramId},
+      attributes: {
+        exclude: ['updatedAt', 'createdAt', 'password']
+      },
+    });
   }
 
   static getReferralByUserId(id) {
