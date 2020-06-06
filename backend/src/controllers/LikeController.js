@@ -26,6 +26,12 @@ class LikeController {
       await ValidationService.isBodyFieldEmpty(projectId, 'projectId');
       const project = await ProjectService.findById(projectId);
       await ValidationService.isNotExists(project, 'project');
+      if (project.userId === req.user.id) {
+        return res.status(400).json({
+          success: false,
+          message: "You can't like you project"
+        })
+      }
       const user = await UserService.findById(project.userId);
       await ValidationService.isNotExists(user, 'user');
       const like = await LikeService.findByUserIdAndProjectId(req.user.id, projectId);
@@ -36,7 +42,6 @@ class LikeController {
       if (!like) {
         body.projectId = projectId;
         await LikeService.upsertLike(body);
-        await user.increment(['points'], {by: 1});
       } else {
         if (like.reputation === body.reputation) {
           return res.status(400).json({
