@@ -1,0 +1,42 @@
+.header {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 157px;
+    height: 58px;
+    background: url('/static/logo.svg') no-repeat center;
+    background-size: contain;
+    color: #fff;
+    font-weight: 500;
+    font-size: 24px;
+  }
+
+  &__item {
+    font-weight: 900;
+    font-size: 16px;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #1b1b25;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__right-icon {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}

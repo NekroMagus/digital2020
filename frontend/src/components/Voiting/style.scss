@@ -1,0 +1,76 @@
+.voiting {
+  &__col {
+    margin-left: 110px;
+    width: 280px;
+  }
+
+  &__name {
+    font-size: 18px;
+    font-weight: 900;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    width: 150px;
+    align-self: flex-end;
+    letter-spacing: normal;
+    color: #1b1b25;
+  }
+
+  &__vote {
+    font-size: 16px;
+    font-weight: 900;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.2px;
+    margin-bottom: 25px;
+    color: #93939d;
+  }
+
+  &__btn {
+    padding-left: 25px;
+    display: flex;
+    align-items: center;
+    width: 115px;
+    height: 51px;
+    border-radius: 6px;
+    border: solid 1px #dadada;
+    cursor: pointer;
+
+    &:hover {
+      .voiting__icon {
+        background-image: url("/static/vote/Cyan.svg")
+      }
+    }
+
+    &:last-child:hover {
+      .voiting__icon {
+        background-image: url("/static/vote/Hover.svg")
+      }
+    }
+
+    &:first-child.dislike .voiting__icon  {
+      background-image: url("/static/vote/Dark Cyan.svg")
+    }
+
+    &:last-child.like .voiting__icon  {
+      background-image: url("/static/vote/Active Hover.svg")
+    }
+  }
+
+  &__icon {
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 20px;
+    margin-right: 10px;
+    height: 20px;
+    background-size: contain;
+    background-image: url("/static/vote/Gray.svg");
+
+    &.like {
+      background-image: url("/static/vote/Default.svg");
+    }
+
+  }
+
+}

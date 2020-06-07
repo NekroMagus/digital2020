@@ -1,0 +1,24 @@
+.group-select {
+  &__text {
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: normal;
+    color: #7d7d89;
+    margin-bottom: 15px;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 550px;
+
+    & > * {
+      margin-bottom: 20px;
+    }
+  }
+}

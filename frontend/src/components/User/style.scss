@@ -1,0 +1,27 @@
+.user {
+  &__mock {
+    background: url("/static/mock_1.png") no-repeat center;
+    background-size: contain;
+    width: 896px;
+    height: 828px;
+  }
+
+  &__label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 21px;
+    margin-bottom: 15px;
+    color: #7D7D89;
+  }
+
+  &__card {
+    width: 342px;
+    height: 153px;
+    margin-bottom: 25px;
+    background-size: contain;
+    background-position: center;
+    cursor: pointer;
+    background-repeat: no-repeat;
+  }
+}

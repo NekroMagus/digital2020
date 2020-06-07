@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  app:
+    container_name: hack
+    build: .
+    ports:
+      - '8800:8800'

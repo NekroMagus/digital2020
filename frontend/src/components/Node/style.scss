@@ -1,0 +1,25 @@
+.node {
+  display: flex;
+  align-items: center;
+  width: 400px;
+  margin: 0 auto;
+  &.last {
+    margin: 0 auto 50px;
+  }
+
+  &__circle {
+    margin-right: 100px;
+  }
+
+  &__link {
+    width: 4px;
+    height: 30px;
+    margin: 0 auto;
+    background-color: #e28a56;
+  }
+
+  &__title {
+    color: #24222e;
+    font-size: 26px;
+  }
+}
