@@ -94,12 +94,12 @@ class AuthController {
         const token = await jwt.sign({
           id: newUser.id
         }, SECRET_KEY, {expiresIn: EXPIRED_TIME});
-        res.status(200).json(token);
+        res.status(200).json({token, firstName: user.first_name, lastName: user.last_name});
       } else {
         const token = await jwt.sign({
           id: userDb.id
         }, SECRET_KEY, {expiresIn: EXPIRED_TIME});
-        res.status(200).json(token);
+        res.status(200).json({token, firstName: user.first_name, lastName: user.last_name});
       }
     } catch (e) {
       next(e);
